@@ -44,7 +44,7 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
                     SharedPreferences.Editor editor = getSharedPreferences("Login", MODE_PRIVATE).edit();
                     editor.putBoolean("LoggedIn", true);
                     editor.commit();
-                    startActivity(new Intent(this, MainActivity.class));
+                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
                 }
                 else
                     showErrorMessage();

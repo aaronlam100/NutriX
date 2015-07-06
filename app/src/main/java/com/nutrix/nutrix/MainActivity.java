@@ -16,7 +16,7 @@ import android.widget.EditText;
 import android.widget.TabHost;
 import android.support.v7.widget.Toolbar;
 
-public class MainActivity extends AppCompatActivity { //implements View.OnClickListener {
+public class MainActivity extends ActionBarActivity {
 
     EditText etName, etAge, etUsername;
     public static final String MyPREFERENCES = "Login";
@@ -52,10 +52,10 @@ public class MainActivity extends AppCompatActivity { //implements View.OnClickL
 
     @Override
     protected void onStart(){
+        super.onStart();
         prefs = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-        if(!prefs.getBoolean("LoggedIn", false))
-            startActivity(new Intent(MainActivity.this, LoginActivity.class));
-
+        if(prefs.contains("LoggedIn") && prefs.getBoolean("LoggedIn", true))
+            startActivity(new Intent(this, LoginActivity.class));
     }
 
 
