@@ -16,7 +16,7 @@ import android.widget.EditText;
 import android.widget.TabHost;
 import android.support.v7.widget.Toolbar;
 
-public class MainActivity extends ActionBarActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     EditText etName, etAge, etUsername;
     Button bLogout;
@@ -52,6 +52,13 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         prefs = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
 
         bLogout.setOnClickListener(this);
+    }
+
+    @Override //need this method for the action bar
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
     }
 
     @Override
