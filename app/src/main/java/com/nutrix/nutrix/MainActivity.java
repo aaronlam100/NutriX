@@ -70,7 +70,8 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     @Override
     protected void onStart() {
         super.onStart();
-        if (!prefs.contains("LoggedIn"))
-            startActivity(new Intent(this, LoginActivity.class));
+//        if (!prefs.contains("LoggedIn") && prefs.getBoolean("LoggedIn", true))
+        if (!prefs.getBoolean("LoggedIn", false))
+            startActivity(new Intent(this, LoginRegisterActivity.class));
     }
 }
