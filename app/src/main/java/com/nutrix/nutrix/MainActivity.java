@@ -1,6 +1,8 @@
 package com.nutrix.nutrix;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -16,11 +18,9 @@ import android.support.v7.widget.Toolbar;
 
 public class MainActivity extends AppCompatActivity { //implements View.OnClickListener {
 
-    //    UserLocalStore userLocalStore;
     EditText etName, etAge, etUsername;
-    Button bLogout;
-    boolean loggedIn = false;
-
+    public static final String MyPREFERENCES = "Login";
+    SharedPreferences prefs;
     private Toolbar toolbar;
 
     @Override
@@ -48,70 +48,15 @@ public class MainActivity extends AppCompatActivity { //implements View.OnClickL
 
         toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
-
-//        etUsername = (EditText) findViewById(R.id.etUsername);
-//        etName = (EditText) findViewById(R.id.etName);
-//        etAge = (EditText) findViewById(R.id.etAge);
-//        bLogout = (Button) findViewById(R.id.bLogout);
-//
-//        bLogout.setOnClickListener(this);
     }
 
-//    @Override
-//    public void onClick(View v) {
-//        switch (v.getId()) {
-//            case R.id.bLogout:
-//                Intent loginIntent = new Intent(this, Login.class);
-//                startActivity(loginIntent);
-//                break;
-//        }
-//    }
-
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//        if (!loggedIn)
-//            startActivity(new Intent(MainActivity.this, Login.class));
-//    }
-
-    //    private boolean authenticate() {
-//        if (userLocalStore.getLoggedInUser() == null) {
-//            Intent intent = new Intent(this, Login.class);
-//            startActivity(intent);
-//            return false;
-//        }
-//        return true;
-//    }
-//
-//    private void displayUserDetails() {
-//        User user = userLocalStore.getLoggedInUser();
-//        etUsername.setText(user.username);
-//        etName.setText(user.name);
-//        etAge.setText(user.age + "");
-//    }
-//
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-    //
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+    protected void onStart(){
+        prefs = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        if(!prefs.getBoolean("LoggedIn", false))
+            startActivity(new Intent(MainActivity.this, LoginActivity.class));
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-//        if(id == R.id.action_search) {
-//            startActivity(new Intent(this, SearchActivity.class));
-//        }
-
-        return super.onOptionsItemSelected(item);
     }
+
+
 }
