@@ -12,4 +12,5 @@
     <string name="title_activity_search">SearchActivity</string>
     <string name="search_hint">Search something</string>
     <item name="menu_search" type="id">Hello</item>
+    <string name="title_activity_login_register">LoginRegisterActivity</string>
 </resources>

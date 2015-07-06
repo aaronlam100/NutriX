@@ -16,9 +16,10 @@ import android.widget.EditText;
 import android.widget.TabHost;
 import android.support.v7.widget.Toolbar;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements View.OnClickListener {
 
     EditText etName, etAge, etUsername;
+    Button bLogout;
     public static final String MyPREFERENCES = "Login";
     SharedPreferences prefs;
     private Toolbar toolbar;
@@ -27,6 +28,7 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         TabHost tabHost = (TabHost) findViewById(android.R.id.tabhost);
         tabHost.setup();
 
@@ -46,17 +48,33 @@ public class MainActivity extends ActionBarActivity {
         tabHost.addTab(profile);
         tabHost.addTab(settings);
 
+        bLogout = (Button) findViewById(R.id.bLogout);
+
         toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
+
+        prefs = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+
+        bLogout.setOnClickListener(this);
     }
 
     @Override
-    protected void onStart(){
-        super.onStart();
-        prefs = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-        if(prefs.contains("LoggedIn") && prefs.getBoolean("LoggedIn", true))
-            startActivity(new Intent(this, LoginActivity.class));
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.bLogout:
+                SharedPreferences.Editor editor = getSharedPreferences("Login", 0).edit();
+                editor.putBoolean("LoggedIn", false);
+                editor.commit();
+                Intent returnIntent = new Intent(this, LoginActivity.class);
+                startActivity(returnIntent);
+                break;
+        }
     }
 
-
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (!prefs.contains("LoggedIn"))
+            startActivity(new Intent(this, LoginActivity.class));
+    }
 }

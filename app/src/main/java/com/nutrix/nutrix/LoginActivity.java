@@ -40,12 +40,8 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
                 String username = etUsername.getText().toString();
                 String password = etPassword.getText().toString();
 
-                if(username.equals("admin") && password.equals("nutrix")) {
-                    SharedPreferences.Editor editor = getSharedPreferences("Login", MODE_PRIVATE).edit();
-                    editor.putBoolean("LoggedIn", true);
-                    editor.commit();
-                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                }
+                if(username.equals("admin") && password.equals("nutrix"))
+                    logUserIn();
                 else
                     showErrorMessage();
                 break;
@@ -56,26 +52,13 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_login, menu);
-        return true;
-    }
+    private void logUserIn(){
+        SharedPreferences.Editor editor = getSharedPreferences("Login", 0).edit();
+        editor.putBoolean("LoggedIn", true);
+        editor.commit();
+        Intent returnIntent = new Intent(this, MainActivity.class);
+        startActivity(returnIntent);
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     private void showErrorMessage() {
