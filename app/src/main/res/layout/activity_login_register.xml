@@ -10,16 +10,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Login"
-        android:id="@+id/button"
+        android:id="@+id/bLogin"
         android:minWidth="500dp"
-        android:layout_above="@+id/button2"
+        android:layout_above="@+id/bSignUp"
         android:layout_alignParentRight="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sign Up"
-        android:id="@+id/button2"
+        android:id="@+id/bSignUp"
         android:minWidth="500dp"
         android:layout_marginBottom="142dp"
         android:layout_alignParentBottom="true"

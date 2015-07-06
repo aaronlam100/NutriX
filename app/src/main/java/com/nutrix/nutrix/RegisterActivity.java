@@ -9,9 +9,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+
 
 public class RegisterActivity extends ActionBarActivity implements View.OnClickListener{
-    EditText etName, etAge, etUsername, etPassword;
+    EditText etName, etAge, etUsername, etPassword, etHeight, etWeight;
     Button bRegister;
 
     @Override
@@ -32,7 +38,17 @@ public class RegisterActivity extends ActionBarActivity implements View.OnClickL
     public void onClick(View view){
         switch (view.getId()) {
             case R.id.bRegister:
-                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                User newUser = new User(etUsername.toString(), etPassword.toString(), 17, 69, 170);
+                try {
+                    FileOutputStream fout = new FileOutputStream("LoginInfo.ser");
+                    ObjectOutputStream oos = new ObjectOutputStream(fout);
+                    oos.writeObject(newUser);
+                    oos.close();
+                }
+                catch(IOException i){
+                    i.printStackTrace();
+                }
+                startActivity(new Intent(RegisterActivity.this, LoginRegisterActivity.class));
         }
     }
 }

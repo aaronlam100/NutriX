@@ -12,11 +12,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+
 
 public class LoginActivity extends ActionBarActivity implements View.OnClickListener {
 
     Button bLogin;
-    TextView registerLink;
     EditText etUsername, etPassword;
 
     @Override
@@ -24,13 +27,27 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+//        User newUser = null;
+//        try{
+//            FileInputStream fis = new FileInputStream("LoginInfo.ser");
+//            ObjectInputStream ois = new ObjectInputStream(fis);
+//            newUser = (User) ois.readObject();
+//            ois.close();
+//            System.out.println("Done");
+//        }
+//        catch(IOException i ){
+//            i.printStackTrace();
+//        }
+//        catch(ClassNotFoundException c){
+//            c.printStackTrace();
+//        }
+//        System.out.println("Username: " + newUser.getUsername());
+
         bLogin = (Button) findViewById(R.id.bLogin);
         etUsername = (EditText) findViewById(R.id.etUsername);
         etPassword = (EditText) findViewById(R.id.etPassword);
-        registerLink = (TextView) findViewById(R.id.tvRegisterLink);
 
         bLogin.setOnClickListener(this);
-        registerLink.setOnClickListener(this);
     }
 
     @Override
@@ -44,10 +61,6 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
                     logUserIn();
                 else
                     showErrorMessage();
-                break;
-            case R.id.tvRegisterLink:
-                Intent registerIntent = new Intent(LoginActivity.this, RegisterActivity.class);
-                startActivity(registerIntent);
                 break;
         }
     }

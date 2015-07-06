@@ -29,21 +29,17 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TabHost tabHost = (TabHost) findViewById(android.R.id.tabhost);
+        TabHost tabHost = (TabHost) findViewById(android.R.id.tabhost);                    //tabsetup
         tabHost.setup();
-
         TabHost.TabSpec home = tabHost.newTabSpec("Home");
         home.setContent(R.id.Home);
         home.setIndicator("Home");
-
         TabHost.TabSpec profile = tabHost.newTabSpec("Profile");
         profile.setContent(R.id.Profile);
         profile.setIndicator("Profile");
-
         TabHost.TabSpec settings = tabHost.newTabSpec("Settings");
         settings.setContent(R.id.Settings);
         settings.setIndicator("Settings");
-
         tabHost.addTab(home);
         tabHost.addTab(profile);
         tabHost.addTab(settings);
@@ -65,7 +61,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 SharedPreferences.Editor editor = getSharedPreferences("Login", 0).edit();
                 editor.putBoolean("LoggedIn", false);
                 editor.commit();
-                Intent returnIntent = new Intent(this, LoginActivity.class);
+                Intent returnIntent = new Intent(this, LoginRegisterActivity.class);
                 startActivity(returnIntent);
                 break;
         }
