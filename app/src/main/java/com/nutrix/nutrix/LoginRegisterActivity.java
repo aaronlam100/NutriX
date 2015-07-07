@@ -3,13 +3,14 @@ package com.nutrix.nutrix;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
 
-public class LoginRegisterActivity extends ActionBarActivity implements View.OnClickListener{
+public class LoginRegisterActivity extends AppCompatActivity implements View.OnClickListener{
 
     Button bLogin, bSignUp;
 
