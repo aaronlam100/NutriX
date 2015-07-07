@@ -21,6 +21,7 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
 
     Button bLogin;
     EditText etUsername, etPassword;
+    UserLocalStore uls;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,21 +52,30 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
     }
 
     @Override
-    public void onClick(View view){
+    public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bLogin:
                 String username = etUsername.getText().toString();
                 String password = etPassword.getText().toString();
 
-                if(username.equals("admin") && password.equals("nutrix"))
+                if (username.equals("admin") && password.equals("nutrix"))
                     logUserIn();
-                else
-                    showErrorMessage();
+                else{
+                    uls = new UserLocalStore(view.getContext());
+                    authenticate(username, password);
+                }
                 break;
         }
     }
 
-    private void logUserIn(){
+    private void authenticate(String u, String p) {
+        if(uls.authenticate(u, p))
+            logUserIn();
+        else
+            showErrorMessage();
+    }
+
+    private void logUserIn() {
         SharedPreferences.Editor editor = getSharedPreferences("Login", 0).edit();
         editor.putBoolean("LoggedIn", true);
         editor.commit();

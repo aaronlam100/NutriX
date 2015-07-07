@@ -25,10 +25,12 @@ public class RegisterActivity extends ActionBarActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        etName = (EditText) findViewById(R.id.etName);
-        etAge = (EditText) findViewById(R.id.etAge);
         etUsername = (EditText) findViewById(R.id.etUsername);
         etPassword = (EditText) findViewById(R.id.etPassword);
+        etName = (EditText) findViewById(R.id.etName);
+        etAge = (EditText) findViewById(R.id.etAge);
+        etWeight = (EditText) findViewById(R.id.etWeight);
+        etHeight = (EditText) findViewById(R.id.etHeight);
         bRegister = (Button) findViewById(R.id.bRegister);
 
         bRegister.setOnClickListener(this);
@@ -38,16 +40,9 @@ public class RegisterActivity extends ActionBarActivity implements View.OnClickL
     public void onClick(View view){
         switch (view.getId()) {
             case R.id.bRegister:
-                User newUser = new User(etUsername.toString(), etPassword.toString(), 17, 69, 170);
-                try {
-                    FileOutputStream fout = new FileOutputStream("LoginInfo.ser");
-                    ObjectOutputStream oos = new ObjectOutputStream(fout);
-                    oos.writeObject(newUser);
-                    oos.close();
-                }
-                catch(IOException i){
-                    i.printStackTrace();
-                }
+                User newUser = new User(etName.toString(), etUsername.toString(), etPassword.toString(), Integer.parseInt(etAge.toString()), Integer.parseInt(etWeight.toString()), Integer.parseInt(etHeight.toString()));
+                UserLocalStore uls = new UserLocalStore(view.getContext()); //not sure if this is right
+                uls.storeUserData(newUser);
                 startActivity(new Intent(RegisterActivity.this, LoginRegisterActivity.class));
         }
     }

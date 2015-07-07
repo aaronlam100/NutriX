@@ -39,6 +39,10 @@ public class UserLocalStore {
         userLocalDatabaseEditor.commit();
     }
 
+    public boolean authenticate(String username, String password){
+        return username.equals(userLocalDatabase.getString("username", "")) && password.equals(userLocalDatabase.getString("password", ""));
+    }
+
     public User getLoggedInUser() {
         if (userLocalDatabase.getBoolean("loggedIn", false) == false) {
             return null;
