@@ -31,6 +31,9 @@
             android:name=".RegisterActivity"
             android:label="@string/title_activity_register" />
         <activity
+            android:name=".LoginRegisterActivity"
+            android:label="@string/title_activity_login_register" />
+        <activity
             android:name=".SearchableActivity"
             android:label="@string/title_activity_searchable" >
             <intent-filter>
