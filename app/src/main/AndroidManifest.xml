@@ -30,6 +30,9 @@
         <activity
             android:name=".RegisterActivity"
             android:label="@string/title_activity_register" />
+        <activity
+            android:name=".LoginRegisterActivity"
+            android:label="@string/title_activity_login_register" />
         <activity android:name=".SearchActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
