@@ -1,5 +1,7 @@
 package com.nutrix.nutrix;
 
+import android.app.SearchManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -12,6 +14,21 @@ public class SearchableActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_searchable);
+
+        Intent intent = getIntent();
+        handleIntent(intent);
+    }
+
+    public void handleIntent(Intent intent) {
+        //get query out of intent
+        if(Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            String searchQuery = intent.getStringExtra(SearchManager.QUERY);
+            doSearchQuery(searchQuery);
+        }
+    }
+
+    public void doSearchQuery(String searchQuery) {
+
     }
 
     @Override
