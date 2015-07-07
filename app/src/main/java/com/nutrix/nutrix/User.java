@@ -1,21 +1,33 @@
 package com.nutrix.nutrix;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 import java.io.Serializable;
 
 /**
  * Created by Brian on 7/6/2015.
  */
-public class User implements Serializable{
-    private String username, password;
+public class User implements Serializable {
+    private String name, username, password;
     private int age, weight, height;
 
-    public User(String username, String password, int age, int weight, int height)
-    {
+
+    public User(String name, String username, String password, int age, int weight, int height) {
+        this.name = name;
         this.username = username;
         this.password = password;
         this.age = age;
         this.weight = weight;
         this.height = height;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getUsername() {
