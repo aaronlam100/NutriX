@@ -3,6 +3,7 @@ package com.nutrix.nutrix;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,7 +17,7 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 
 
-public class RegisterActivity extends ActionBarActivity implements View.OnClickListener{
+public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
     EditText etName, etAge, etUsername, etPassword, etHeight, etWeight;
     Button bRegister;
 
