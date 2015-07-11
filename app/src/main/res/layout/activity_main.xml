@@ -159,6 +159,15 @@
                         android:text="Logout" />
                 </LinearLayout>
 
+                <LinearLayout
+                    android:id="@+id/NutritionFacts"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                </LinearLayout>
+
             </FrameLayout>
         </LinearLayout>
     </TabHost>
