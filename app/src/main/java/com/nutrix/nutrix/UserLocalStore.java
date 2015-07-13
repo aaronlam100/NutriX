@@ -55,7 +55,7 @@ public class UserLocalStore {
         int weight = userLocalDatabase.getInt("weight", -1);
         int height = userLocalDatabase.getInt("height", -1);
 
-        User user = new User(name, username, password, age, weight, height);
+        User user = new User(name, username, password, age + "", weight + "", height + "");
         return user;
     }
 }

@@ -13,13 +13,19 @@ public class User implements Serializable {
     private int age, weight, height;
 
 
-    public User(String name, String username, String password, int age, int weight, int height) {
+    public User(String name, String username, String password, String age, String weight, String height) {
         this.name = name;
         this.username = username;
         this.password = password;
-        this.age = age;
-        this.weight = weight;
-        this.height = height;
+        this.age = Integer.parseInt(age);
+        this.weight = Integer.parseInt(weight);
+        this.height = Integer.parseInt(height);
+    }
+
+    public User(String name, String username, String password){
+        this.name = name;
+        this.username = username;
+        this.password = password;
     }
 
     public String getName() {

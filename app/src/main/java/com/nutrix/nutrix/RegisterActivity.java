@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -41,7 +42,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View view){
         switch (view.getId()) {
             case R.id.bRegister:
-                User newUser = new User(etName.toString(), etUsername.toString(), etPassword.toString(), Integer.parseInt(etAge.toString()), Integer.parseInt(etWeight.toString()), Integer.parseInt(etHeight.toString()));
+                User newUser = new User(etName.getText().toString(), etUsername.getText().toString(), etPassword.getText().toString(), etAge.getText().toString(), etWeight.getText().toString(), etHeight.getText().toString());
                 UserLocalStore uls = new UserLocalStore(view.getContext()); //not sure if this is right
                 uls.storeUserData(newUser);
                 startActivity(new Intent(RegisterActivity.this, LoginRegisterActivity.class));
