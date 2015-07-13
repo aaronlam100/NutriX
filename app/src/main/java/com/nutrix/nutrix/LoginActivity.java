@@ -29,22 +29,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-//        User newUser = null;
-//        try{
-//            FileInputStream fis = new FileInputStream("LoginInfo.ser");
-//            ObjectInputStream ois = new ObjectInputStream(fis);
-//            newUser = (User) ois.readObject();
-//            ois.close();
-//            System.out.println("Done");
-//        }
-//        catch(IOException i ){
-//            i.printStackTrace();
-//        }
-//        catch(ClassNotFoundException c){
-//            c.printStackTrace();
-//        }
-//        System.out.println("Username: " + newUser.getUsername());
-
         bLogin = (Button) findViewById(R.id.bLogin);
         etUsername = (EditText) findViewById(R.id.etUsername);
         etPassword = (EditText) findViewById(R.id.etPassword);

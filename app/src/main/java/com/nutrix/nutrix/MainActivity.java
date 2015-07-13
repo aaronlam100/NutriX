@@ -19,70 +19,39 @@ import android.widget.EditText;
 import android.widget.TabHost;
 import android.support.v7.widget.Toolbar;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends ActionBarActivity implements View.OnClickListener {
 
-    EditText etName, etAge, etUsername;
-    Button bLogout;
     public static final String MyPREFERENCES = "Login";
     SharedPreferences prefs;
     private Toolbar toolbar;
+    Button bHome, bProfile, bSettings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TabHost tabHost = (TabHost) findViewById(android.R.id.tabhost);                    //tabsetup
-        tabHost.setup();
-        TabHost.TabSpec home = tabHost.newTabSpec("Home");
-        home.setContent(R.id.Home);
-        home.setIndicator("Home");
-        TabHost.TabSpec profile = tabHost.newTabSpec("Profile");
-        profile.setContent(R.id.Profile);
-        profile.setIndicator("Profile");
-        TabHost.TabSpec settings = tabHost.newTabSpec("Settings");
-        settings.setContent(R.id.Settings);
-        settings.setIndicator("Settings");
-        tabHost.addTab(home);
-        tabHost.addTab(profile);
-        tabHost.addTab(settings);
-
-        bLogout = (Button) findViewById(R.id.bLogout);
-
-        toolbar = (Toolbar) findViewById(R.id.app_bar);
-        setSupportActionBar(toolbar);
+        bHome = (Button) findViewById(R.id.bHome);
+        bProfile = (Button) findViewById(R.id.bProfile);
+        bSettings = (Button) findViewById(R.id.bSettings);
 
         prefs = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
 
-        bLogout.setOnClickListener(this);
-    }
-
-    @Override //need this method for the action bar
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_searchable, menu);
-
-        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        MenuItem searchActionBarItem = menu.findItem(R.id.action_search);
-        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchActionBarItem);
-
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-        searchView.setIconifiedByDefault(true);
-        searchView.setQueryHint(getResources().getString(R.string.search_hint));
-
-        return true;
+        bHome.setOnClickListener(this);
+        bProfile.setOnClickListener(this);
+        bSettings.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.bLogout:
-                SharedPreferences.Editor editor = getSharedPreferences("Login", 0).edit();
-                editor.putBoolean("LoggedIn", false);
-                editor.commit();
-                Intent returnIntent = new Intent(this, LoginRegisterActivity.class);
-                startActivity(returnIntent);
+            case(R.id.bHome):
+                break;
+            case(R.id.bProfile):
+                startActivity(new Intent(this, ProfileActivity.class));
+                break;
+            case(R.id.bSettings):
+                startActivity(new Intent(this, SettingsActivity.class));
                 break;
         }
     }
@@ -94,4 +63,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (!prefs.getBoolean("LoggedIn", false))
             startActivity(new Intent(this, LoginRegisterActivity.class));
     }
+
+//    @Override //need this method for the action bar
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        MenuInflater inflater = getMenuInflater();
+//        inflater.inflate(R.menu.menu_searchable, menu);
+//
+//        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+//        MenuItem searchActionBarItem = menu.findItem(R.id.action_search);
+//        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchActionBarItem);
+//
+//        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+//        searchView.setIconifiedByDefault(true);
+//        searchView.setQueryHint(getResources().getString(R.string.search_hint));
+//
+//        return true;
+//    }
 }
