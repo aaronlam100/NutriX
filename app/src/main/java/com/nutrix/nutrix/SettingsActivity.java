@@ -9,6 +9,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -19,6 +20,8 @@ import android.widget.Button;
 public class SettingsActivity extends AppCompatActivity implements View.OnClickListener{
 
     Button bHome, bProfile, bSettings, bLogout;
+    private Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +36,9 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         bProfile.setOnClickListener(this);
         bSettings.setOnClickListener(this);
         bLogout.setOnClickListener(this);
+
+        toolbar = (Toolbar) findViewById(R.id.app_bar);
+        setSupportActionBar(toolbar);
     }
 
     public void onClick(View view){

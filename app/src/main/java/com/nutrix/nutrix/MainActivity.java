@@ -40,6 +40,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bHome.setOnClickListener(this);
         bProfile.setOnClickListener(this);
         bSettings.setOnClickListener(this);
+
+        toolbar = (Toolbar) findViewById(R.id.app_bar);
+        setSupportActionBar(toolbar);
     }
 
     @Override
