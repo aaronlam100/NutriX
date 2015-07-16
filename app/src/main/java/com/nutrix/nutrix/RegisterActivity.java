@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -39,8 +40,16 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         etWeight = (EditText) findViewById(R.id.etWeight);
         etHeight = (EditText) findViewById(R.id.etHeight);
         bRegister = (Button) findViewById(R.id.bRegister);
+
         spSex = (Spinner) findViewById(R.id.spSex);
+        ArrayAdapter<CharSequence> sexAdapter = ArrayAdapter.createFromResource(this, R.array.sex_array, android.R.layout.simple_spinner_item);
+        sexAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spSex.setAdapter(sexAdapter);
+
         spPhysAct = (Spinner) findViewById(R.id.spPhysAct);
+        ArrayAdapter<CharSequence> physActAdapter = ArrayAdapter.createFromResource(this, R.array.physAct_array, android.R.layout.simple_spinner_item);
+        physActAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spSex.setAdapter(physActAdapter);
 
         spSex.setOnItemSelectedListener(this);
         spPhysAct.setOnItemSelectedListener(this);
@@ -62,7 +71,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         switch (view.getId()) {
             case (R.id.spSex):
-                parent.getItemAtPosition(position).toString();
+                String test;
+                test = parent.getItemAtPosition(position).toString();
+                Log.d("Sex", test);
                 break;
             case (R.id.spPhysAct):
                 parent.getItemAtPosition(position).toString();
