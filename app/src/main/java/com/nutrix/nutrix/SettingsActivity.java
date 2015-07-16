@@ -20,6 +20,7 @@ import android.widget.Button;
 public class SettingsActivity extends AppCompatActivity implements View.OnClickListener{
 
     Button bHome, bProfile, bSettings, bLogout;
+    UserLocalStore uls;
     private Toolbar toolbar;
 
     @Override
@@ -52,9 +53,9 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
             case(R.id.bSettings):
                 break;
             case(R.id.bLogout):
-                SharedPreferences.Editor editor = getSharedPreferences("Login", 0).edit();
-                editor.putBoolean("LoggedIn", false);
-                editor.commit();
+                uls = new UserLocalStore(this);
+                uls.setUserLoggedIn(false);
+                uls.clearUserData(); //when you log out everything is lost
                 Intent returnIntent = new Intent(this, LoginRegisterActivity.class);
                 startActivity(returnIntent);
                 break;

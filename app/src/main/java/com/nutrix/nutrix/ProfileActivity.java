@@ -9,16 +9,20 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener{
 
     Button bHome, bProfile, bSettings;
+    UserLocalStore uls;
+    TextView tvName, tvAge, tvWeight, tvHeight;
     private Toolbar toolbar;
 
     @Override
@@ -33,6 +37,18 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         bHome.setOnClickListener(this);
         bProfile.setOnClickListener(this);
         bSettings.setOnClickListener(this);
+
+        tvName = (TextView) findViewById(R.id.tvName);
+        tvAge = (TextView) findViewById(R.id.tvAge);
+        tvWeight = (TextView) findViewById(R.id.tvWeight);
+        tvHeight = (TextView) findViewById(R.id.tvHeight);
+
+        uls = new UserLocalStore(this);
+        User user = uls.getLoggedInUser();
+        tvName.setText(user.getName());
+        tvAge.setText(user.getAge() + "");
+        tvWeight.setText(user.getWeight() + " lbs");
+        tvHeight.setText(user.getHeight() + "\"");
 
         toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
