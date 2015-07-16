@@ -121,4 +121,20 @@
         android:textColor="@android:color/black"
         android:textSize="30dp" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Edit"
+        android:id="@+id/EditLink"
+        android:layout_centerVertical="true"
+        android:textSize="20dp"
+        android:password="false"
+        android:clickable="false"
+        android:gravity="center_horizontal"
+        android:textStyle="bold"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentEnd="false"
+        android:layout_alignStart="@+id/bProfile" />
+
 </RelativeLayout>

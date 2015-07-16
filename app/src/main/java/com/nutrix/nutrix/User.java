@@ -11,6 +11,7 @@ import java.io.Serializable;
 public class User implements Serializable {
     private String name, username, password;
     private int age, weight, height;
+    private int physAct;
 
 
     public User(String name, String username, String password, String age, String weight, String height) {
@@ -75,4 +76,5 @@ public class User implements Serializable {
     public void setHeight(int height) {
         this.height = height;
     }
+
 }
