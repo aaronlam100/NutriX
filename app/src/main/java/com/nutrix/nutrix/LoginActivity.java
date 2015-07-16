@@ -61,9 +61,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void logUserIn() {
-        SharedPreferences.Editor editor = getSharedPreferences("Login", 0).edit();
-        editor.putBoolean("LoggedIn", true);
-        editor.commit();
+        uls.setUserLoggedIn(true);
         Intent returnIntent = new Intent(this, MainActivity.class);
         startActivity(returnIntent);
 

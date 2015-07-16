@@ -61,7 +61,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         switch (view.getId()) {
             case R.id.bRegister:
                 User newUser = new User(etName.getText().toString(), etUsername.getText().toString(), etPassword.getText().toString(), etAge.getText().toString(), etWeight.getText().toString(), etHeight.getText().toString());
-                UserLocalStore uls = new UserLocalStore(view.getContext()); //not sure if this is right
+                newUser.setSex(spSex.getSelectedItem().toString());
+                newUser.setPhysAct(Integer.parseInt(spPhysAct.getSelectedItem().toString()));
+                Log.d("Sex", spSex.getSelectedItem().toString());
+                Log.d("Physical Activity", spPhysAct.getSelectedItem().toString());
+                UserLocalStore uls = new UserLocalStore(this); //not sure if this is right
                 uls.storeUserData(newUser);
                 startActivity(new Intent(RegisterActivity.this, LoginRegisterActivity.class));
         }
@@ -69,16 +73,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        switch (view.getId()) {
-            case (R.id.spSex):
-                String test;
-                test = parent.getItemAtPosition(position).toString();
-                Log.d("Sex", test);
-                break;
-            case (R.id.spPhysAct):
-                parent.getItemAtPosition(position).toString();
-                break;
-        }
+
     }
 
     @Override

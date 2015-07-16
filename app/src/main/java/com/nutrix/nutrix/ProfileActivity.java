@@ -22,7 +22,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     Button bHome, bProfile, bSettings;
     UserLocalStore uls;
-    TextView tvName, tvAge, tvWeight, tvHeight;
+    TextView tvName, tvAge, tvWeight, tvHeight, tvSex, tvPhysAct;
     private Toolbar toolbar;
 
     @Override
@@ -42,6 +42,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         tvAge = (TextView) findViewById(R.id.tvAge);
         tvWeight = (TextView) findViewById(R.id.tvWeight);
         tvHeight = (TextView) findViewById(R.id.tvHeight);
+        tvSex = (TextView) findViewById(R.id.tvSex);
+        tvPhysAct = (TextView) findViewById(R.id.tvPhysAct);
 
         uls = new UserLocalStore(this);
         User user = uls.getLoggedInUser();
@@ -49,6 +51,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         tvAge.setText(user.getAge() + "");
         tvWeight.setText(user.getWeight() + " lbs");
         tvHeight.setText(user.getHeight() + "\"");
+        tvSex.setText(user.getSex());
+        tvPhysAct.setText(user.getPhysAct() + "");
 
         toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);

@@ -21,9 +21,11 @@ public class UserLocalStore {
         userLocalDatabaseEditor.putString("name", user.getName());
         userLocalDatabaseEditor.putString("username", user.getUsername());
         userLocalDatabaseEditor.putString("password", user.getPassword());
+        userLocalDatabaseEditor.putString("sex", user.getSex());
         userLocalDatabaseEditor.putInt("age", user.getAge());
         userLocalDatabaseEditor.putInt("height", user.getHeight());
         userLocalDatabaseEditor.putInt("weight", user.getWeight());
+        userLocalDatabaseEditor.putInt("physAct", user.getPhysAct());
         userLocalDatabaseEditor.commit();
     }
 
@@ -51,11 +53,15 @@ public class UserLocalStore {
         String name = userLocalDatabase.getString("name", "");
         String username = userLocalDatabase.getString("username", "");
         String password = userLocalDatabase.getString("password", "");
+        String sex = userLocalDatabase.getString("sex", "");
         int age = userLocalDatabase.getInt("age", -1);
         int weight = userLocalDatabase.getInt("weight", -1);
         int height = userLocalDatabase.getInt("height", -1);
+        int physAct = userLocalDatabase.getInt("physAct", -1);
 
         User user = new User(name, username, password, age + "", weight + "", height + "");
+        user.setPhysAct(physAct);
+        user.setSex(sex);
         return user;
     }
 }
