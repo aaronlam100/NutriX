@@ -9,6 +9,8 @@ import java.io.Serializable;
  * Created by Brian on 7/6/2015.
  */
 public class User implements Serializable {
+    private final double POUNDS_TO_KG = 0.453592;
+    private final double INCHES_TO_CM = 2.54;
     private String name, username, password, sex;
     private int age, weight, height, physAct;
 
@@ -91,6 +93,36 @@ public class User implements Serializable {
 
     public int getPhysAct(){
         return this.physAct;
+    }
+
+    public double getReqCalories(){
+        double bmr;
+        if(sex.equals("Male")){
+            bmr = 88.362 + (13.397 * weight * POUNDS_TO_KG) + (4.799 * height * INCHES_TO_CM) - (5.677 * age);
+        }
+        else{
+            bmr = 447.593 + (9.247 * weight * POUNDS_TO_KG) + (3.098 * height * INCHES_TO_CM) - (4.330 * age);
+        }
+
+        double reqCal = -1;
+        switch(physAct){
+            case 1:
+                reqCal = bmr * 1.2;
+                break;
+            case 2:
+                reqCal = bmr * 1.375;
+                break;
+            case 3:
+                reqCal = bmr * 1.55;
+                break;
+            case 4:
+                reqCal = bmr * 1.725;
+                break;
+            case 5:
+                reqCal = bmr * 1.9;
+                break;
+        }
+        return reqCal;
     }
 
 }

@@ -18,12 +18,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TabHost;
 import android.support.v7.widget.Toolbar;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    public static final String MyPREFERENCES = "Login";
-    SharedPreferences prefs;
+    UserLocalStore uls;
     private Toolbar toolbar;
+    TextView tvGreeting, tvCalories;
+    User user;
     Button bHome, bProfile, bSettings;
 
     @Override
@@ -31,11 +33,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        uls = new UserLocalStore(this);
+        user = uls.getLoggedInUser();
+
         bHome = (Button) findViewById(R.id.bHome);
         bProfile = (Button) findViewById(R.id.bProfile);
         bSettings = (Button) findViewById(R.id.bSettings);
 
-        prefs = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        tvGreeting = (TextView) findViewById(R.id.tvGreeting);
+        tvCalories = (TextView) findViewById(R.id.tvCalories);
+        tvGreeting.setText(tvGreeting.getText() + " " + user.getName());
+        tvCalories.setText((int)user.getReqCalories() + " kcal");
 
         bHome.setOnClickListener(this);
         bProfile.setOnClickListener(this);
@@ -63,8 +71,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onStart() {
         super.onStart();
-//        if (!prefs.contains("LoggedIn") && prefs.getBoolean("LoggedIn", true))
-        if (!prefs.getBoolean("LoggedIn", false))
+        if (uls.getLoggedInUser() == null)
             startActivity(new Intent(this, LoginRegisterActivity.class));
     }
 
