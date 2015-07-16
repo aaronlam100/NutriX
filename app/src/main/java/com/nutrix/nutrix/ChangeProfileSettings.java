@@ -1,7 +1,6 @@
 package com.nutrix.nutrix;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -14,33 +13,30 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+public class ChangeProfileSettings extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
-
-public class RegisterActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
-
-    EditText etName, etAge, etUsername, etPassword, etHeight, etWeight;
+    private EditText etName, etAge, etHeight, etWeight;
+    private UserLocalStore uls = new UserLocalStore(this);
+    User user = uls.getLoggedInUser();
     Spinner spSex, spPhysAct;
-    Button bRegister;
+    Button bSave;
     String sex;
     int physAct;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_change_profile_settings);
 
-        etUsername = (EditText) findViewById(R.id.etUsername);
-        etPassword = (EditText) findViewById(R.id.etPassword);
         etName = (EditText) findViewById(R.id.etName);
         etAge = (EditText) findViewById(R.id.etAge);
         etWeight = (EditText) findViewById(R.id.etWeight);
         etHeight = (EditText) findViewById(R.id.etHeight);
-        bRegister = (Button) findViewById(R.id.bRegister);
+
+        etName.setText(user.getName());
+        etAge.setText(Integer.toString(user.getAge()));
+        etWeight.setText(Integer.toString(user.getWeight()));
+        etHeight.setText(Integer.toString(user.getHeight()));
 
         spSex = (Spinner) findViewById(R.id.spSex);
         ArrayAdapter<CharSequence> sexAdapter = ArrayAdapter.createFromResource(this, R.array.sex_array, android.R.layout.simple_spinner_item);
@@ -54,22 +50,42 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         spSex.setOnItemSelectedListener(this);
         spPhysAct.setOnItemSelectedListener(this);
-        bRegister.setOnClickListener(this);
+        bSave.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()) {
+        switch(view.getId()) {
             case R.id.bRegister:
-                User newUser = new User(etName.getText().toString(), etUsername.getText().toString(), etPassword.getText().toString(), etAge.getText().toString(), etWeight.getText().toString(), etHeight.getText().toString());
-                newUser.setSex(spSex.getSelectedItem().toString());
-                newUser.setPhysAct(Integer.parseInt(spPhysAct.getSelectedItem().toString()));
+                user.setSex(spSex.getSelectedItem().toString());
+                user.setPhysAct(Integer.parseInt(spPhysAct.getSelectedItem().toString()));
                 Log.d("Sex", spSex.getSelectedItem().toString());
                 Log.d("Physical Activity", spPhysAct.getSelectedItem().toString());
                 UserLocalStore uls = new UserLocalStore(this); //not sure if this is right
-                uls.storeUserData(newUser);
-                startActivity(new Intent(RegisterActivity.this, LoginRegisterActivity.class));
+                uls.storeUserData(user);
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_change_profile_settings, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -81,4 +97,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+
+
 }

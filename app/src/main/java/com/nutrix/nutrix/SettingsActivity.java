@@ -19,7 +19,7 @@ import android.widget.Button;
 
 public class SettingsActivity extends AppCompatActivity implements View.OnClickListener{
 
-    Button bHome, bProfile, bSettings, bLogout;
+    Button bHome, bProfile, bSettings, bLogout, bChangeProfile;
     UserLocalStore uls;
     private Toolbar toolbar;
 
@@ -32,11 +32,13 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         bProfile = (Button) findViewById(R.id.bProfile);
         bSettings = (Button) findViewById(R.id.bSettings);
         bLogout = (Button) findViewById(R.id.bLogout);
+        bChangeProfile = (Button) findViewById(R.id.bChangeProfile);
 
         bHome.setOnClickListener(this);
         bProfile.setOnClickListener(this);
         bSettings.setOnClickListener(this);
         bLogout.setOnClickListener(this);
+        bChangeProfile.setOnClickListener(this);
 
         toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
@@ -59,6 +61,9 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                 uls.clearUserData(); //when you log out everything is lost
                 Intent returnIntent = new Intent(this, LoginRegisterActivity.class);
                 startActivity(returnIntent);
+                break;
+            case(R.id.bChangeProfile):
+                startActivity(new Intent(this, ChangeProfileSettings.class));
                 break;
         }
 
