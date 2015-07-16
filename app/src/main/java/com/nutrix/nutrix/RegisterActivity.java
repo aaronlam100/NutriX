@@ -8,8 +8,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -18,9 +20,12 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 
 
-public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
+public class RegisterActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
     EditText etName, etAge, etUsername, etPassword, etHeight, etWeight;
+    Spinner spSex, spPhysAct;
     Button bRegister;
+    String sex;
+    int physAct;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,12 +39,16 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         etWeight = (EditText) findViewById(R.id.etWeight);
         etHeight = (EditText) findViewById(R.id.etHeight);
         bRegister = (Button) findViewById(R.id.bRegister);
+        spSex = (Spinner) findViewById(R.id.spSex);
+        spPhysAct = (Spinner) findViewById(R.id.spPhysAct);
 
+        spSex.setOnItemSelectedListener(this);
+        spPhysAct.setOnItemSelectedListener(this);
         bRegister.setOnClickListener(this);
     }
 
     @Override
-    public void onClick(View view){
+    public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bRegister:
                 User newUser = new User(etName.getText().toString(), etUsername.getText().toString(), etPassword.getText().toString(), etAge.getText().toString(), etWeight.getText().toString(), etHeight.getText().toString());
@@ -47,5 +56,22 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 uls.storeUserData(newUser);
                 startActivity(new Intent(RegisterActivity.this, LoginRegisterActivity.class));
         }
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        switch (view.getId()) {
+            case (R.id.spSex):
+                parent.getItemAtPosition(position).toString();
+                break;
+            case (R.id.spPhysAct):
+                parent.getItemAtPosition(position).toString();
+                break;
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }
