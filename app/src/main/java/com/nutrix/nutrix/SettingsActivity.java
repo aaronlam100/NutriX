@@ -40,6 +40,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
 
         toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Settings");
     }
 
     public void onClick(View view){

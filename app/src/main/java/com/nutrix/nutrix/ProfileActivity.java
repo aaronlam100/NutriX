@@ -52,6 +52,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Profile");
     }
 
     public void onClick(View view){
