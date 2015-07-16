@@ -49,7 +49,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         spPhysAct = (Spinner) findViewById(R.id.spPhysAct);
         ArrayAdapter<CharSequence> physActAdapter = ArrayAdapter.createFromResource(this, R.array.physAct_array, android.R.layout.simple_spinner_item);
         physActAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spSex.setAdapter(physActAdapter);
+        spPhysAct.setAdapter(physActAdapter);
 
         spSex.setOnItemSelectedListener(this);
         spPhysAct.setOnItemSelectedListener(this);
