@@ -34,6 +34,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         uls = new UserLocalStore(this);
+        if (uls.getLoggedInUser() == null)
+            startActivity(new Intent(this, LoginRegisterActivity.class));
+
         user = uls.getLoggedInUser();
 
         bHome = (Button) findViewById(R.id.bHome);

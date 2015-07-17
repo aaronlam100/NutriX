@@ -1,8 +1,5 @@
 package com.nutrix.nutrix;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-
 import java.io.Serializable;
 
 /**
