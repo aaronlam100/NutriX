@@ -91,6 +91,20 @@ public class User implements Serializable {
         return this.physAct;
     }
 
+
+    public int getReqCalcium() {
+        int calcium;
+        if (sex.equals("Male")) {
+            if (getAge() <= 70)
+                return 1000;
+            else return 1200;
+        } else {
+            if (getAge() <= 50)
+                return 1000;
+            else return 1200; //Calcium intake in mg
+        }
+    }
+
     public double getReqProtein() {
         double protein = getWeight() * POUNDS_TO_KG;
         protein *= (0.6 + (0.3 * getPhysAct()));
