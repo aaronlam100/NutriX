@@ -5,15 +5,14 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.nutrix.nutrix.ChangeProfileSettings">
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <LinearLayout
+    
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <TextView
+                android:id="@+id/tvName"
                 android:text="Name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -23,70 +22,88 @@
                 android:layout_width="match_parent"
                 android:layout_marginBottom="10dp"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:layout_below="@+id/tvName"/>
 
             <TextView
+                android:id="@+id/tvAge"
                 android:text="Age"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/etName"/>
 
             <EditText
                 android:id="@+id/etAge"
                 android:layout_width="match_parent"
                 android:layout_marginBottom="10dp"
                 android:layout_height="wrap_content"
-                android:inputType="number" />
+                android:inputType="number"
+                android:layout_below="@+id/tvAge"/>
 
             <TextView
+                android:id="@+id/tvWeight"
                 android:text="Weight"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/etAge"/>
 
             <EditText
                 android:id="@+id/etWeight"
                 android:layout_width="match_parent"
                 android:layout_marginBottom="10dp"
                 android:layout_height="wrap_content"
-                android:inputType="number" />
+                android:inputType="number"
+                android:layout_below="@+id/tvWeight"/>
 
             <TextView
+                android:id="@+id/tvHeight"
                 android:text="Height"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/etWeight"/>
 
             <EditText
                 android:id="@+id/etHeight"
                 android:layout_width="match_parent"
                 android:layout_marginBottom="10dp"
                 android:layout_height="wrap_content"
-                android:inputType="number" />
+                android:inputType="number"
+                android:layout_below="@+id/tvHeight"/>
 
             <TextView
+                android:id="@+id/tvSex"
                 android:text="Sex"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/etHeight"/>
 
             <Spinner
                 android:id="@+id/spSex"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/etHeight"
+                android:layout_toRightOf="@id/tvSex"/>
 
             <TextView
+                android:id="@+id/tvPhysAct"
                 android:text="Physical Activity Level"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spSex"/>
 
             <Spinner
                 android:id="@+id/spPhysAct"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spSex"
+                android:layout_toRightOf="@id/tvPhysAct"/>
 
             <Button
-                android:id="@+id/bRegister"
+                android:id="@+id/bSave"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Save"
-                android:layout_marginTop="150dp" />
-        </LinearLayout>
-    </ScrollView>
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true" />
+        </RelativeLayout>
 </RelativeLayout>
