@@ -12,7 +12,6 @@ public class User implements Serializable {
     private int age, weight, height, physAct;
 
 
-
     public User(String name, String username, String password, String age, String weight, String height) {
         this.name = name;
         this.username = username;
@@ -22,7 +21,7 @@ public class User implements Serializable {
         this.height = Integer.parseInt(height);
     }
 
-    public User(String name, String username, String password){
+    public User(String name, String username, String password) {
         this.name = name;
         this.username = username;
         this.password = password;
@@ -76,32 +75,41 @@ public class User implements Serializable {
         this.height = height;
     }
 
-    public void setSex(String sex){
+    public void setSex(String sex) {
         this.sex = sex;
     }
 
-    public String getSex(){
+    public String getSex() {
         return this.sex;
     }
 
-    public void setPhysAct(int physAct){
+    public void setPhysAct(int physAct) {
         this.physAct = physAct;
     }
 
-    public int getPhysAct(){
+    public int getPhysAct() {
         return this.physAct;
     }
 
-
-    public double getReqTotalFat(){
-    double totalFat;
-       totalFat = (getReqCalories() * 0.25)*(1/9);
-    return totalFat; // total fat in grams
+    public int getReqSodium() {
+        if (getAge() < 50)
+            return 1500;
+        else return 1200;
     }
 
-    public int getReqIron(){
+    public int getReqCholesterol() {
+        return 200; // flat rate of 200mg per person
+    }
+
+    public double getReqTotalFat() {
+        double totalFat;
+        totalFat = (getReqCalories() * 0.25) * (1 / 9);
+        return totalFat; // total fat in grams
+    }
+
+    public int getReqIron() {
         int iron;
-        if(sex.equals("Male")) {
+        if (sex.equals("Male")) {
             if (getAge() < 1)
                 iron = 11;
             else if (getAge() < 3)
@@ -114,8 +122,7 @@ public class User implements Serializable {
                 iron = 11;
             else
                 iron = 8;
-        }
-        else{
+        } else {
             if (getAge() < 1)
                 iron = 11;
             else if (getAge() < 3)
@@ -131,19 +138,19 @@ public class User implements Serializable {
             else
                 iron = 8;
         }
-return iron; // total iron in mg
+        return iron; // total iron in mg
     }
-    public double getReqCalories(){
+
+    public double getReqCalories() {
         double bmr;
-        if(sex.equals("Male")){
+        if (sex.equals("Male")) {
             bmr = 88.362 + (13.397 * weight * POUNDS_TO_KG) + (4.799 * height * INCHES_TO_CM) - (5.677 * age);
-        }
-        else{
+        } else {
             bmr = 447.593 + (9.247 * weight * POUNDS_TO_KG) + (3.098 * height * INCHES_TO_CM) - (4.330 * age);
         }
 
         double reqCal = -1;
-        switch(physAct){
+        switch (physAct) {
             case 1:
                 reqCal = bmr * 1.2;
                 break;
