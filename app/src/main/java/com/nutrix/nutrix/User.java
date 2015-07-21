@@ -92,8 +92,15 @@ public class User implements Serializable {
         return this.physAct;
     }
 
+
+    public String getReqTotalFat(){
+    double totalFat;
+       totalFat = (getReqCalories() * 0.25)*(1/9);
+    return totalFat + "g";
+    }
+
     public String getReqIron(){
-        double iron;
+        int iron;
         if(sex.equals("Male")) {
             if (getAge() < 1)
                 iron = 11;
