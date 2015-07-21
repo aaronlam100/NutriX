@@ -91,6 +91,9 @@ public class User implements Serializable {
         return this.physAct;
     }
 
+    public double getReqSugar() {
+        return getReqCalories() / 40; //Required Sugar in grams
+    }
 
     public int getReqCalcium() {
         int calcium;
