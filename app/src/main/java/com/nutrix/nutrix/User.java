@@ -93,13 +93,13 @@ public class User implements Serializable {
     }
 
 
-    public String getReqTotalFat(){
+    public double getReqTotalFat(){
     double totalFat;
        totalFat = (getReqCalories() * 0.25)*(1/9);
-    return totalFat + "g";
+    return totalFat; // total fat in grams
     }
 
-    public String getReqIron(){
+    public int getReqIron(){
         int iron;
         if(sex.equals("Male")) {
             if (getAge() < 1)
@@ -131,7 +131,7 @@ public class User implements Serializable {
             else
                 iron = 8;
         }
-return iron + "mg";
+return iron; // total iron in mg
     }
     public double getReqCalories(){
         double bmr;
