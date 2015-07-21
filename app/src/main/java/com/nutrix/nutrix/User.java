@@ -92,6 +92,40 @@ public class User implements Serializable {
         return this.physAct;
     }
 
+    public String getReqIron(){
+        double iron;
+        if(sex.equals("Male")) {
+            if (getAge() < 1)
+                iron = 11;
+            else if (getAge() < 3)
+                iron = 7;
+            else if (getAge() < 8)
+                iron = 10;
+            else if (getAge() < 13)
+                iron = 8;
+            else if (getAge() < 18)
+                iron = 11;
+            else
+                iron = 8;
+        }
+        else{
+            if (getAge() < 1)
+                iron = 11;
+            else if (getAge() < 3)
+                iron = 7;
+            else if (getAge() < 8)
+                iron = 10;
+            else if (getAge() < 13)
+                iron = 8;
+            else if (getAge() < 18)
+                iron = 15;
+            else if (getAge() < 51)
+                iron = 18;
+            else
+                iron = 8;
+        }
+return iron + "mg";
+    }
     public double getReqCalories(){
         double bmr;
         if(sex.equals("Male")){
