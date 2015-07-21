@@ -4,12 +4,10 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -18,47 +16,51 @@ import android.widget.Button;
 import android.widget.TextView;
 
 
-public class ProfileActivity extends AppCompatActivity implements View.OnClickListener{
+public class NutritionFacts extends AppCompatActivity implements View.OnClickListener {
 
-    private Button bHome, bProfile, bSettings, bNutritionFacts;
+    private TextView tvCalories, tvTotalFat, tvCholesterol, tvSodium, tvSugar, tvProtein, tvCalcium, tvIron;
     private UserLocalStore uls;
-    private TextView tvName, tvAge, tvWeight, tvHeight, tvSex, tvPhysAct;
+    private User user;
+    private Button bHome, bProfile, bSettings;
     private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
+        setContentView(R.layout.activity_nutrition_facts);
+
+        uls = new UserLocalStore(this);
+        user = uls.getLoggedInUser();
+
+        tvCalories = (TextView) findViewById(R.id.calories_value);
+        tvTotalFat = (TextView) findViewById(R.id.total_fat_value);
+        tvCholesterol = (TextView) findViewById(R.id.cholesterol_value);
+        tvSodium = (TextView) findViewById(R.id.sodium_value);
+        tvSugar = (TextView) findViewById(R.id.sugars_value);
+        tvProtein = (TextView) findViewById(R.id.protein_value);
+        tvCalcium = (TextView) findViewById(R.id.calcium_value);
+        tvIron = (TextView) findViewById(R.id.iron_value);
+
+        tvCalories.setText(String.valueOf(user.getReqCalories()));
+        tvTotalFat.setText(String.valueOf(user.getReqTotalFat()));
+        tvCholesterol.setText(String.valueOf(user.getReqCholesterol()));
+        tvSodium.setText(String.valueOf(user.getReqSodium()));
+        tvSugar.setText(String.valueOf(user.getReqSugar()));
+        tvProtein.setText(String.valueOf(user.getReqProtein()));
+        tvCalcium.setText(String.valueOf(user.getReqCalcium()));
+        tvIron.setText(String.valueOf(user.getReqIron()));
 
         bHome = (Button) findViewById(R.id.bHome);
         bProfile = (Button) findViewById(R.id.bProfile);
         bSettings = (Button) findViewById(R.id.bSettings);
-        bNutritionFacts = (Button) findViewById(R.id.bNutritionFacts);
 
         bHome.setOnClickListener(this);
         bProfile.setOnClickListener(this);
         bSettings.setOnClickListener(this);
-        bNutritionFacts.setOnClickListener(this);
-
-        tvName = (TextView) findViewById(R.id.tvName);
-        tvAge = (TextView) findViewById(R.id.tvAge);
-        tvWeight = (TextView) findViewById(R.id.tvWeight);
-        tvHeight = (TextView) findViewById(R.id.tvHeight);
-        tvSex = (TextView) findViewById(R.id.tvSex);
-        tvPhysAct = (TextView) findViewById(R.id.tvPhysAct);
-
-        uls = new UserLocalStore(this);
-        User user = uls.getLoggedInUser();
-        tvName.setText(user.getName());
-        tvAge.setText(user.getAge() + "");
-        tvWeight.setText(user.getWeight() + " lbs");
-        tvHeight.setText(user.getHeight() + "\"");
-        tvSex.setText(user.getSex());
-        tvPhysAct.setText(user.getPhysAct() + "");
 
         toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Profile");
+        getSupportActionBar().setTitle("Your Nutrition Facts");
     }
 
     public void onClick(View view){
@@ -67,17 +69,15 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 startActivity(new Intent(this, MainActivity.class));
                 break;
             case(R.id.bProfile):
+                startActivity(new Intent(this, ProfileActivity.class));
                 break;
             case(R.id.bSettings):
                 startActivity(new Intent(this, SettingsActivity.class));
                 break;
-            case(R.id.bNutritionFacts):
-                startActivity(new Intent(this, NutritionFacts.class));
-                break;
         }
     }
 
-    @Override //need this method for the action bar
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         MenuInflater inflater = getMenuInflater();
@@ -92,5 +92,20 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         searchView.setQueryHint(getResources().getString(R.string.search_hint));
 
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -16,13 +16,13 @@ import android.widget.Toast;
 
 public class ChangeProfileSettings extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
-    EditText etName, etAge, etHeight, etWeight;
-    UserLocalStore uls;
-    User user;
-    Spinner spSex, spPhysAct;
-    Button bSave;
-    String sex;
-    int physAct;
+    private EditText etName, etAge, etHeight, etWeight;
+    private UserLocalStore uls;
+    private User user;
+    private Spinner spSex, spPhysAct;
+    private Button bSave;
+    private String sex;
+    private int physAct;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -25,4 +25,7 @@
         <item>5</item>
     </string-array>
     <string name="title_activity_change_profile_settings">ChangeProfileSettings</string>
+    <string name="title_activity_nutrition_facts">NutritionFacts</string>
+
+    <string name="hello_world">Hello world!</string>
 </resources>

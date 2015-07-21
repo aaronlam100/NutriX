@@ -66,7 +66,6 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                 startActivity(new Intent(this, ChangeProfileSettings.class));
                 break;
         }
-
     }
 
     @Override //need this method for the action bar
