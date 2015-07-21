@@ -12,12 +12,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 public class ChangeProfileSettings extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
-    private EditText etName, etAge, etHeight, etWeight;
-    private UserLocalStore uls = new UserLocalStore(this);
-    User user = uls.getLoggedInUser();
+    EditText etName, etAge, etHeight, etWeight;
+    UserLocalStore uls;
+    User user;
     Spinner spSex, spPhysAct;
     Button bSave;
     String sex;
@@ -28,10 +29,14 @@ public class ChangeProfileSettings extends AppCompatActivity implements View.OnC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_profile_settings);
 
+        uls = new UserLocalStore(this);
+        user = uls.getLoggedInUser();
+
         etName = (EditText) findViewById(R.id.etName);
         etAge = (EditText) findViewById(R.id.etAge);
         etWeight = (EditText) findViewById(R.id.etWeight);
         etHeight = (EditText) findViewById(R.id.etHeight);
+        bSave = (Button) findViewById(R.id.bSave);
 
         etName.setText(user.getName());
         etAge.setText(Integer.toString(user.getAge()));
@@ -42,27 +47,39 @@ public class ChangeProfileSettings extends AppCompatActivity implements View.OnC
         ArrayAdapter<CharSequence> sexAdapter = ArrayAdapter.createFromResource(this, R.array.sex_array, android.R.layout.simple_spinner_item);
         sexAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spSex.setAdapter(sexAdapter);
+        spSex.setSelection(sexAdapter.getPosition(user.getSex()));
 
         spPhysAct = (Spinner) findViewById(R.id.spPhysAct);
         ArrayAdapter<CharSequence> physActAdapter = ArrayAdapter.createFromResource(this, R.array.physAct_array, android.R.layout.simple_spinner_item);
         physActAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spPhysAct.setAdapter(physActAdapter);
+        spPhysAct.setSelection(physActAdapter.getPosition(Integer.toString(user.getPhysAct())));
 
         spSex.setOnItemSelectedListener(this);
         spPhysAct.setOnItemSelectedListener(this);
+
         bSave.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
+        uls = new UserLocalStore(this);
+        user = uls.getLoggedInUser();
         switch(view.getId()) {
-            case R.id.bRegister:
+            case R.id.bSave:
+                user.setName(etName.getText().toString());
+                user.setAge(Integer.parseInt(etAge.getText().toString()));
+                user.setWeight(Integer.parseInt(etWeight.getText().toString()));
+                user.setHeight(Integer.parseInt(etHeight.getText().toString()));
                 user.setSex(spSex.getSelectedItem().toString());
                 user.setPhysAct(Integer.parseInt(spPhysAct.getSelectedItem().toString()));
+
                 Log.d("Sex", spSex.getSelectedItem().toString());
                 Log.d("Physical Activity", spPhysAct.getSelectedItem().toString());
-                UserLocalStore uls = new UserLocalStore(this); //not sure if this is right
                 uls.storeUserData(user);
+
+                Toast.makeText(this, "Your settings have been saved!", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, SettingsActivity.class));
         }
     }
 
@@ -97,6 +114,4 @@ public class ChangeProfileSettings extends AppCompatActivity implements View.OnC
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
-
-
 }
