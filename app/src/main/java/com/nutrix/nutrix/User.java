@@ -91,10 +91,16 @@ public class User implements Serializable {
         return this.physAct;
     }
 
+    public double getReqProtein() {
+        double protein = getWeight() * POUNDS_TO_KG;
+        protein *= (0.6 + (0.3 * getPhysAct()));
+        return protein; // grams of protein
+    }
+
     public int getReqSodium() {
         if (getAge() < 50)
             return 1500;
-        else return 1200;
+        else return 1200; // mg of sodium
     }
 
     public int getReqCholesterol() {
