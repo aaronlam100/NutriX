@@ -73,6 +73,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         // Inflate the menu; this adds items to the action bar if it is present.
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_searchable, menu);
+        inflater.inflate(R.menu.menu_main, menu);
 
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         MenuItem searchActionBarItem = menu.findItem(R.id.action_search);

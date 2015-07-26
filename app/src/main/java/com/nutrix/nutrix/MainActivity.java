@@ -83,6 +83,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // Inflate the menu; this adds items to the action bar if it is present.
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_searchable, menu);
+        inflater.inflate(R.menu.menu_main, menu);
 
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         MenuItem searchActionBarItem = menu.findItem(R.id.action_search);
@@ -93,5 +94,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         searchView.setQueryHint(getResources().getString(R.string.search_hint));
 
         return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_settings) {
+            return true;
+        }
+        if(id == R.id.camera) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

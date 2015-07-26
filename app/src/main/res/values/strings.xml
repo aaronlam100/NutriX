@@ -28,4 +28,5 @@
     <string name="title_activity_nutrition_facts">NutritionFacts</string>
 
     <string name="hello_world">Hello world!</string>
+    <string name="camera">camera</string>
 </resources>
