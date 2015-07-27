@@ -41,12 +41,12 @@ public class NutritionFacts extends AppCompatActivity implements View.OnClickLis
         tvCalcium = (TextView) findViewById(R.id.calcium_value);
         tvIron = (TextView) findViewById(R.id.iron_value);
 
-        tvCalories.setText(String.valueOf(user.getReqCalories()));
-        tvTotalFat.setText(String.valueOf(user.getReqTotalFat()));
+        tvCalories.setText(String.valueOf((int)user.getReqCalories()));
+        tvTotalFat.setText(String.valueOf((int)user.getReqTotalFat()));
         tvCholesterol.setText(String.valueOf(user.getReqCholesterol()));
         tvSodium.setText(String.valueOf(user.getReqSodium()));
-        tvSugar.setText(String.valueOf(user.getReqSugar()));
-        tvProtein.setText(String.valueOf(user.getReqProtein()));
+        tvSugar.setText(String.valueOf((int)user.getReqSugar()));
+        tvProtein.setText(String.valueOf((int)user.getReqProtein()));
         tvCalcium.setText(String.valueOf(user.getReqCalcium()));
         tvIron.setText(String.valueOf(user.getReqIron()));
 

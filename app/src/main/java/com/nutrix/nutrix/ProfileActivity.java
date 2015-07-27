@@ -3,6 +3,7 @@ package com.nutrix.nutrix;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -93,5 +94,29 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         searchView.setQueryHint(getResources().getString(R.string.search_hint));
 
         return true;
+    }
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_settings) {
+            return true;
+        }
+        if(id == R.id.camera) {
+            Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(intent, 0);
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // TODO Auto-generated method stub
+        super.onActivityResult(requestCode, resultCode, data);
+        Bitmap bp = (Bitmap) data.getExtras().get("data");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }
