@@ -91,7 +91,7 @@ public class User implements Serializable {
         return this.physAct;
     }
 
-    public double getReqSugar() {
+    public int getReqSugar() {
         return getReqCalories() / 40; //Required Sugar in grams
     }
 
@@ -108,10 +108,10 @@ public class User implements Serializable {
         }
     }
 
-    public double getReqProtein() {
+    public int getReqProtein() {
         double protein = getWeight() * POUNDS_TO_KG;
         protein *= (0.6 + (0.3 * getPhysAct()));
-        return protein; // grams of protein
+        return (int) protein; // grams of protein
     }
 
     public int getReqSodium() {
@@ -124,10 +124,10 @@ public class User implements Serializable {
         return 200; // flat rate of 200mg per person
     }
 
-    public double getReqTotalFat() {
+    public int getReqTotalFat() {
         double totalFat;
-        totalFat = (getReqCalories() * 0.25) * (1 / 9);
-        return totalFat; // total fat in grams
+        totalFat = (getReqCalories() * 0.25) / 9;
+        return (int) totalFat; // total fat in grams
     }
 
     public int getReqIron() {
@@ -164,7 +164,7 @@ public class User implements Serializable {
         return iron; // total iron in mg
     }
 
-    public double getReqCalories() {
+    public int getReqCalories() {
         double bmr;
         if (sex.equals("Male")) {
             bmr = 88.362 + (13.397 * weight * POUNDS_TO_KG) + (4.799 * height * INCHES_TO_CM) - (5.677 * age);
@@ -190,7 +190,6 @@ public class User implements Serializable {
                 reqCal = bmr * 1.9;
                 break;
         }
-        return reqCal;
+        return (int) reqCal;
     }
-
 }
