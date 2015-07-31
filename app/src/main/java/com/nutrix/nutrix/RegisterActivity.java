@@ -23,11 +23,9 @@ import java.io.ObjectOutputStream;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
-    EditText etName, etAge, etUsername, etPassword, etHeight, etWeight;
-    Spinner spSex, spPhysAct;
-    Button bRegister;
-    String sex;
-    int physAct;
+    private EditText etName, etAge, etUsername, etPassword, etHeight, etWeight;
+    private Spinner spSex, spPhysAct;
+    private Button bRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,22 +52,49 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         spSex.setOnItemSelectedListener(this);
         spPhysAct.setOnItemSelectedListener(this);
-        bRegister.setOnClickListener(this);
+
+        bRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (etUsername.getText().toString().length() == 0)
+                    etUsername.setError("Field cannot be empty");
+                if (etPassword.getText().toString().length() == 0)
+                    etPassword.setError("Field cannot be empty");
+                if (etName.getText().toString().length() == 0)
+                    etName.setError("Field cannot be empty");
+                if (etAge.getText().toString().length() == 0)
+                    etAge.setError("Field cannot be empty");
+                if (etWeight.getText().toString().length() == 0)
+                    etWeight.setError("Field cannot be empty");
+                if (etHeight.getText().toString().length() == 0)
+                    etHeight.setError("Field cannot be empty");
+                else {
+                    User newUser = new User(etName.getText().toString(), etUsername.getText().toString(), etPassword.getText().toString(), etAge.getText().toString(), etWeight.getText().toString(), etHeight.getText().toString());
+                    newUser.setSex(spSex.getSelectedItem().toString());
+                    newUser.setPhysAct(Integer.parseInt(spPhysAct.getSelectedItem().toString()));
+                    Log.d("Sex", spSex.getSelectedItem().toString());
+                    Log.d("Physical Activity", spPhysAct.getSelectedItem().toString());
+                    UserLocalStore uls = new UserLocalStore(RegisterActivity.this); //not sure if this is right
+                    uls.storeUserData(newUser);
+                    startActivity(new Intent(RegisterActivity.this, LoginRegisterActivity.class));
+                }
+            }
+        });
     }
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.bRegister:
-                User newUser = new User(etName.getText().toString(), etUsername.getText().toString(), etPassword.getText().toString(), etAge.getText().toString(), etWeight.getText().toString(), etHeight.getText().toString());
-                newUser.setSex(spSex.getSelectedItem().toString());
-                newUser.setPhysAct(Integer.parseInt(spPhysAct.getSelectedItem().toString()));
-                Log.d("Sex", spSex.getSelectedItem().toString());
-                Log.d("Physical Activity", spPhysAct.getSelectedItem().toString());
-                UserLocalStore uls = new UserLocalStore(this); //not sure if this is right
-                uls.storeUserData(newUser);
-                startActivity(new Intent(RegisterActivity.this, LoginRegisterActivity.class));
-        }
+//        switch (view.getId()) {
+//            case R.id.bRegister:
+//                User newUser = new User(etName.getText().toString(), etUsername.getText().toString(), etPassword.getText().toString(), etAge.getText().toString(), etWeight.getText().toString(), etHeight.getText().toString());
+//                newUser.setSex(spSex.getSelectedItem().toString());
+//                newUser.setPhysAct(Integer.parseInt(spPhysAct.getSelectedItem().toString()));
+//                Log.d("Sex", spSex.getSelectedItem().toString());
+//                Log.d("Physical Activity", spPhysAct.getSelectedItem().toString());
+//                UserLocalStore uls = new UserLocalStore(RegisterActivity.this); //not sure if this is right
+//                uls.storeUserData(newUser);
+//                startActivity(new Intent(RegisterActivity.this, LoginRegisterActivity.class));
+//        }
     }
 
     @Override
